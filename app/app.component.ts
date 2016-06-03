@@ -1,17 +1,32 @@
 import { Component } from 'angular2/core';
 
 @Component({
+  selector: 'meal-list',
+  inputs: ['mealList'],
+  template: `
+  <p *ngFor="#currentMeal of mealList" (click)="mealClicked(currentMeal)">
+    ---------<br>
+    Name:"{{ currentMeal.name }}"<br>
+    Details:"{{ currentMeal.details }}"<br>
+    Calories:{{ currentMeal.calories }}<br>
+    ---------
+  </p>
+  `
+})
+export class MealListComponent {
+  public mealList: Meal[];
+  mealClicked(clickedMeal: Meal): void {
+    console.log(clickedMeal);
+  }
+}
+
+@Component({
   selector: 'my-app',
+  directives: [MealListComponent],
   template: `
     <div class="container">
-    <h1>Meal Tracker</h1>
-    <p *ngFor="#meal of meals" (click)="mealWasSelected(meal)">
-      ---------<br>
-      Name:"{{ meal.name }}"<br>
-      Details:"{{ meal.details }}"<br>
-      Calories:{{ meal.calories }}<br>
-      ---------
-    </p>
+      <h1>Meal Tracker</h1>
+      <meal-list [mealList]="meals"></meal-list>
     </div>
   `
 })

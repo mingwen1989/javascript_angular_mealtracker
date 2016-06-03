@@ -5,7 +5,7 @@ import { Component, EventEmitter } from 'angular2/core';
   inputs: ['mealList'],
   outputs: ['onMealSelect'],
   template: `
-  <p *ngFor="#currentMeal of mealList" (click)="mealClicked(currentMeal)">
+  <p *ngFor="#currentMeal of mealList" (click)="mealClicked(currentMeal)" [class.selected]="currentMeal === selectedMeal">
     ---------<br>
     Name:"{{ currentMeal.name }}"<br>
     Details:"{{ currentMeal.details }}"<br>
@@ -17,11 +17,13 @@ import { Component, EventEmitter } from 'angular2/core';
 export class MealListComponent {
   public mealList: Meal[];
   public onMealSelect: EventEmitter<Meal>;
+  public selectedMeal: Meal;
   constructor() {
     this.onMealSelect = new EventEmitter();
   }
   mealClicked(clickedMeal: Meal): void {
     console.log(clickedMeal);
+    this.selectedMeal = clickedMeal;
     this.onMealSelect.emit(clickedMeal);
   }
 }

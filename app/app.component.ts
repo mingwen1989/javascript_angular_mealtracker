@@ -22,6 +22,7 @@ export class MealListComponent {
   }
   mealClicked(clickedMeal: Meal): void {
     console.log(clickedMeal);
+    this.onMealSelect.emit(clickedMeal);
   }
 }
 

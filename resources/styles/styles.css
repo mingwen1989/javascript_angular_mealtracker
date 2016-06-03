@@ -5,3 +5,7 @@ h1 {
 .container {
   font-family: Courier;
 }
+
+.selected {
+  color: #22bdf0;
+}
